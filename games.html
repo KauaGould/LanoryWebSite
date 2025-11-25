@@ -6,28 +6,14 @@
     <title>Lenory — Games</title>
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
     <style>
-      :root {
-        --bg: #0d0d0d;
-        --card: rgba(22, 22, 22, 0.85);
-        --accent: #6d5dfc;
-        --text: #fff;
-        --muted: #bbb;
-        --radius: 16px;
-        --shadow: rgba(0, 0, 0, 0.5);
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Arial, sans-serif;
-      }
       body {
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+        margin: 0;
+        background: #0d0d0d;
+        color: #fff;
+        font-family: Arial, sans-serif;
       }
+
+      /* NAVBAR */
       nav {
         background: #141414;
         padding: 15px 25px;
@@ -39,7 +25,7 @@
       nav .logo {
         font-size: 25px;
         font-weight: bold;
-        color: var(--accent);
+        color: #6d5dfc;
       }
       nav .nav-links a {
         margin-left: 20px;
@@ -51,37 +37,78 @@
       nav .nav-links a:hover {
         color: #fff;
       }
-      .main-container {
-        flex: 1;
-        display: flex;
-        padding: 15px;
+
+      /* GRID DE GAMES */
+      .games-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 20px;
-        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 0 15px;
       }
+
       .game-card {
-        width: 200px;
-        background: var(--card);
-        border-radius: var(--radius);
-        padding: 15px;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.2s;
+        background: #161616;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 1px solid #222;
       }
       .game-card:hover {
-        background: #1f1f1f;
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
       }
       .game-card img {
-        max-width: 100%;
-        border-radius: var(--radius);
+        width: 100%;
+        max-width: 200px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        object-fit: cover;
       }
       .game-card h3 {
-        margin-top: 10px;
-        font-size: 16px;
-        color: var(--accent);
+        margin: 8px 0;
+        font-size: 18px;
+        color: #a99fff;
+      }
+      .game-card p.game-desc {
+        font-size: 14px;
+        color: #ccc;
+        margin: 8px 0 12px 0;
+        text-align: center;
+      }
+      .game-card button {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 8px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+      .game-card button:first-of-type {
+        background: #6d5dfc;
+        color: #fff;
+      }
+      .game-card button:first-of-type:hover {
+        background: #5a4ad0;
+      }
+      .game-card .invite-btn {
+        background: #25d366;
+        color: #022;
+      }
+      .game-card .invite-btn:hover {
+        background: #1ebf5a;
       }
     </style>
   </head>
   <body>
+    <!-- NAVBAR -->
     <nav>
       <div class="logo">Lenory</div>
       <div class="nav-links">
@@ -90,39 +117,75 @@
         <a href="chat.html">Chat</a>
         <a href="communities.html">Comunidades</a>
         <a href="watchparty.html">WatchParty</a>
+        <a href="games.html">Games</a>
       </div>
     </nav>
 
-    <div class="main-container" id="gamesList"></div>
+    <h2 style="text-align: center; margin-top: 20px">Jogos Disponíveis</h2>
+
+    <div class="games-container">
+      <div class="game-card">
+        <img src="assets/img/deadshot.jpg" alt="Deadshot.io" />
+        <h3>Deadshot.io</h3>
+        <p class="game-desc">
+          Teste sua mira e reflexos neste jogo de tiro multiplayer online. Quem
+          conseguir mais headshots vence!
+        </p>
+        <button onclick="window.open('https://deadshot.io','_blank')">
+          Jogar Agora
+        </button>
+        <button class="invite-btn" onclick="invite('Deadshot.io')">
+          Convidar Amigos
+        </button>
+      </div>
+
+      <div class="game-card">
+        <img src="assets/img/gartic.jpg" alt="Gartic" />
+        <h3>Gartic</h3>
+        <p class="game-desc">
+          Mostre seu talento artístico e adivinhe desenhos de outros jogadores
+          em tempo real. Ria com os amigos!
+        </p>
+        <button onclick="window.open('https://gartic.io','_blank')">
+          Jogar Agora
+        </button>
+        <button class="invite-btn" onclick="invite('Gartic')">
+          Convidar Amigos
+        </button>
+      </div>
+
+      <div class="game-card">
+        <img src="assets/img/garticphone.jpg" alt="Gartic Phone" />
+        <h3>Gartic Phone</h3>
+        <p class="game-desc">
+          O clássico telefone sem fio em versão desenho. Traga seus amigos e
+          veja histórias hilárias se formarem!
+        </p>
+        <button onclick="window.open('https://garticphone.com','_blank')">
+          Jogar Agora
+        </button>
+        <button class="invite-btn" onclick="invite('Gartic Phone')">
+          Convidar Amigos
+        </button>
+      </div>
+    </div>
 
     <script>
-      if (localStorage.getItem("lenory_logged") !== "true") {
-        window.location.href = "login.html";
+      function invite(game) {
+        const link = window.location.href;
+        const message = `Joga ${game} comigo no Lenory! Acesse: ${link}`;
+        if (navigator.share) {
+          navigator
+            .share({
+              title: "Convite para Jogar!",
+              text: message,
+              url: link,
+            })
+            .catch((err) => console.log("Erro ao compartilhar:", err));
+        } else {
+          prompt("Copie o link para convidar seus amigos:", message);
+        }
       }
-
-      const games = [
-        {
-          name: "Jogo Teste 1",
-          img: "https://via.placeholder.com/200x120?text=Game+1",
-        },
-        {
-          name: "Jogo Teste 2",
-          img: "https://via.placeholder.com/200x120?text=Game+2",
-        },
-        {
-          name: "Jogo Teste 3",
-          img: "https://via.placeholder.com/200x120?text=Game+3",
-        },
-      ];
-
-      const gamesList = document.getElementById("gamesList");
-      games.forEach((g) => {
-        const div = document.createElement("div");
-        div.className = "game-card";
-        div.innerHTML = `<img src="${g.img}" alt="${g.name}"><h3>${g.name}</h3>`;
-        div.onclick = () => alert("Em breve vai dar pra jogar: " + g.name);
-        gamesList.appendChild(div);
-      });
     </script>
   </body>
 </html>

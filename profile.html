@@ -6,90 +6,147 @@
     <title>Lenory — Perfil</title>
     <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
     <style>
-      :root {
-        --bg: #0d0d0d;
-        --card: rgba(22, 22, 22, 0.85);
-        --accent: #6d5dfc;
-        --text: #fff;
-        --muted: #bbb;
-        --radius: 16px;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-      }
       body {
-        background: var(--bg);
-        color: var(--text);
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0d0d0d;
+        color: #fff;
       }
+
       nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
         background: #141414;
-        padding: 15px 25px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
         border-bottom: 1px solid #222;
+        z-index: 10;
       }
+
       nav .logo {
-        font-size: 25px;
+        font-size: 22px;
         font-weight: bold;
-        color: var(--accent);
+        color: #6d5dfc;
       }
+
       nav .nav-links a {
-        margin-left: 20px;
+        margin-left: 15px;
         text-decoration: none;
         color: #bbb;
-        font-size: 16px;
+        font-size: 14px;
         transition: 0.2s;
       }
+
       nav .nav-links a:hover {
         color: #fff;
       }
-      .profile-container {
-        flex: 1;
+
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 70px 30px 20px;
+        border-bottom: 1px solid #222;
+      }
+
+      .profile-avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6d5dfc, #8bd3ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 36px;
+        color: #022;
+      }
+
+      .profile-info h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .profile-info p {
+        margin: 2px 0;
+        color: #aaa;
+        font-size: 14px;
+      }
+
+      .profile-info a {
+        color: #6d5dfc;
+        text-decoration: none;
+      }
+
+      .profile-info a:hover {
+        text-decoration: underline;
+      }
+
+      .feed {
+        max-width: 600px;
+        margin: 20px auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 20px;
+        gap: 15px;
       }
-      .card {
+
+      .post {
         background: #161616;
-        padding: 20px;
-        border-radius: var(--radius);
+        border-radius: 12px;
         border: 1px solid #222;
-        width: 300px;
-        text-align: center;
+        padding: 15px;
       }
-      .card h2 {
-        margin-bottom: 10px;
-        color: var(--accent);
+
+      .post .title {
+        font-weight: bold;
+        color: #a99fff;
+        margin-bottom: 6px;
+        font-size: 16px;
       }
-      .card p {
+
+      .post .text {
+        font-size: 14px;
+        color: #ccc;
+      }
+
+      .post img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+
+      .comments-section {
+        background: #161616;
+        border-radius: 12px;
+        border: 1px solid #222;
+        padding: 15px;
+        margin-top: 20px;
+      }
+
+      .comments-section h3 {
+        margin-top: 0;
+        color: #6d5dfc;
+        font-size: 16px;
+      }
+
+      .comment {
+        font-size: 14px;
         color: #ccc;
         margin-bottom: 10px;
       }
-      button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: var(--radius);
-        background: var(--accent);
-        color: #0d0d0d;
-        font-weight: bold;
-        cursor: pointer;
+
+      .comment b {
+        color: #a99fff;
       }
     </style>
   </head>
   <body>
-    <script>
-      if (localStorage.getItem("lenory_logged") !== "true") {
-        window.location.href = "login.html";
-      }
-    </script>
     <nav>
       <div class="logo">Lenory</div>
       <div class="nav-links">
@@ -97,25 +154,41 @@
         <a href="profile.html">Perfil</a>
         <a href="chat.html">Chat</a>
         <a href="communities.html">Comunidades</a>
-        <a href="watchparty.html">WatchParty</a>
+        <a href="watchparty.html">Watch Party</a>
         <a href="games.html">Games</a>
+        <a href="settings.html">Configurações</a>
       </div>
     </nav>
 
-    <div class="profile-container">
-      <div class="card">
-        <h2>Kauã</h2>
+    <div class="profile-header">
+      <div class="profile-avatar">K</div>
+      <div class="profile-info">
+        <h2>Kauã Vieprz</h2>
         <p>@kaua_dev</p>
-        <p>Developer e criador do Lenory</p>
-        <button onclick="logout()">Logout</button>
+        <p>
+          Desenvolvedor e criador de jogos.
+          <a href="https://github.com/kauagould" target="_blank">Github</a>
+        </p>
       </div>
     </div>
 
-    <script>
-      function logout() {
-        localStorage.removeItem("lenory_logged");
-        window.location.href = "login.html";
-      }
-    </script>
+    <div class="feed">
+      <div class="post">
+        <div class="title">Primeiro post do perfil</div>
+        <div class="text">Boa samuel! (Easter Egg permanente 😎)</div>
+      </div>
+
+      <div class="post">
+        <div class="title">Atualização do projeto</div>
+        <div class="text">Adicionei novos recursos na versão Alpha 1.2!</div>
+        <img src="assets/img/sample-game.jpg" alt="Game" />
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <h3>Comentários feitos</h3>
+      <div class="comment"><b>Kauã:</b> Que legal essa atualização!</div>
+      <div class="comment"><b>Kauã:</b> Boa Samuel!</div>
+    </div>
   </body>
 </html>
