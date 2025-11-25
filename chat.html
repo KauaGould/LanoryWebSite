@@ -2,22 +2,248 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Chat</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lenory — Chat</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+    <style>
+      :root {
+        --bg: #0d0d0d;
+        --card: rgba(22, 22, 22, 0.85);
+        --accent: #6d5dfc;
+        --text: #fff;
+        --muted: #bbb;
+        --radius: 16px;
+        --shadow: rgba(0, 0, 0, 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      nav {
+        background: #141414;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #222;
+      }
+
+      nav .logo {
+        font-size: 25px;
+        font-weight: bold;
+        color: var(--accent);
+      }
+      nav .nav-links a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #bbb;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+      nav .nav-links a:hover {
+        color: #fff;
+      }
+
+      .chat-container {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+      }
+
+      .contacts {
+        width: 250px;
+        background: var(--card);
+        padding: 15px;
+        border-right: 1px solid #222;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .contact {
+        padding: 10px;
+        border-radius: var(--radius);
+        background: #161616;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .contact:hover {
+        background: #1f1f1f;
+      }
+
+      .contact.active {
+        background: var(--accent);
+        color: #0d0d0d;
+      }
+
+      .chat {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: var(--bg);
+        padding: 15px;
+      }
+
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .message {
+        max-width: 60%;
+        padding: 10px 15px;
+        border-radius: var(--radius);
+        background: #161616;
+        word-wrap: break-word;
+      }
+
+      .message.self {
+        align-self: flex-end;
+        background: var(--accent);
+        color: #0d0d0d;
+      }
+
+      .input-box {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .input-box input {
+        flex: 1;
+        padding: 12px;
+        border-radius: var(--radius);
+        border: none;
+        background: #222;
+        color: var(--text);
+        font-size: 14px;
+      }
+
+      .input-box button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: var(--radius);
+        background: var(--accent);
+        color: #0d0d0d;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .input-box button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px var(--shadow);
+      }
+    </style>
   </head>
   <body>
+    <!-- NAVBAR -->
     <nav>
-      <a href="index.html">Home</a>
-      <a href="chat.html">Chat</a>
-      <a href="perfil.html">Perfil</a>
-      <a href="watchparty.html">WatchParty</a>
-      <a href="games.html">Games</a>
+      <div class="logo">Lenory</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Perfil</a>
+        <a href="communities.html">Comunidades</a>
+        <a href="watchparty.html">WatchParty</a>
+        <a href="games.html">Games</a>
+      </div>
     </nav>
 
-    <div class="container">
-      <h1>Chat</h1>
-      <p>(Coloque seu sistema de chat aqui.)</p>
+    <div class="chat-container">
+      <!-- Lista de contatos -->
+      <div class="contacts" id="contacts"></div>
+
+      <!-- Conversa -->
+      <div class="chat">
+        <div class="messages" id="messages"></div>
+        <div class="input-box">
+          <input
+            type="text"
+            id="msgInput"
+            placeholder="Digite uma mensagem..."
+          />
+          <button id="sendBtn">Enviar</button>
+        </div>
+      </div>
     </div>
+
+    <script>
+      // Bloqueia acesso se não estiver logado
+      if (localStorage.getItem("lenory_logged") !== "true") {
+        window.location.href = "login.html";
+      }
+
+      // Contatos fake
+      const contactsData = ["Samuel", "Bia", "Lucas", "Mila"];
+      const contactsEl = document.getElementById("contacts");
+      let activeContact = contactsData[0];
+
+      // Mensagens por contato
+      const messagesData = {
+        Samuel: [{ from: "Samuel", text: "Boa samuel!" }],
+        Bia: [],
+        Lucas: [],
+        Mila: [],
+      };
+
+      function renderContacts() {
+        contactsEl.innerHTML = "";
+        contactsData.forEach((name) => {
+          const div = document.createElement("div");
+          div.className = "contact" + (name === activeContact ? " active" : "");
+          div.textContent = name;
+          div.onclick = () => {
+            activeContact = name;
+            renderContacts();
+            renderMessages();
+          };
+          contactsEl.appendChild(div);
+        });
+      }
+
+      const messagesEl = document.getElementById("messages");
+      function renderMessages() {
+        messagesEl.innerHTML = "";
+        (messagesData[activeContact] || []).forEach((msg) => {
+          const div = document.createElement("div");
+          div.className = "message" + (msg.from === "Kauã" ? " self" : "");
+          div.textContent = msg.text;
+          messagesEl.appendChild(div);
+        });
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      document.getElementById("sendBtn").addEventListener("click", () => {
+        const input = document.getElementById("msgInput");
+        const text = input.value.trim();
+        if (!text) return;
+        messagesData[activeContact] = messagesData[activeContact] || [];
+        messagesData[activeContact].push({ from: "Kauã", text });
+        input.value = "";
+        renderMessages();
+      });
+
+      // Inicializa
+      renderContacts();
+      renderMessages();
+    </script>
   </body>
 </html>

@@ -4,45 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lenory — Login</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
     <style>
+      :root {
+        --bg: #0d0d0d;
+        --card: rgba(22, 22, 22, 0.85);
+        --accent: #6d5dfc;
+        --text: #fff;
+        --muted: #bbb;
+        --radius: 16px;
+        --shadow: rgba(0, 0, 0, 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
       body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: var(--bg);
+        color: var(--text);
         height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
+
       .login-box {
-        background: #161616;
-        padding: 30px;
-        width: 320px;
-        border-radius: 12px;
-        border: 1px solid #222;
-        box-shadow: 0 0 10px #0007;
+        background: var(--card);
+        padding: 40px;
+        width: 350px;
+        border-radius: var(--radius);
+        box-shadow: 0 10px 30px var(--shadow);
+        text-align: center;
       }
+
+      h1 {
+        color: var(--accent);
+        margin-bottom: 25px;
+        font-size: 28px;
+      }
+
       input {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 12px;
-        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 12px;
         border: none;
         background: #222;
-        color: #fff;
+        color: var(--text);
+        font-size: 14px;
       }
+
       button {
         width: 100%;
         padding: 12px;
         border: none;
-        border-radius: 8px;
-        background: #6d5dfc;
-        color: #fff;
+        border-radius: 12px;
+        background: var(--accent);
+        color: #0d0d0d;
         font-weight: bold;
         cursor: pointer;
-        transition: 0.2s;
+        font-size: 16px;
+        transition: transform 0.2s, box-shadow 0.2s;
       }
+
       button:hover {
-        transform: scale(1.02);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px var(--shadow);
       }
+
       .error {
         color: #ff5c5c;
         margin-bottom: 10px;
@@ -51,24 +84,27 @@
       }
     </style>
   </head>
-
   <body>
     <div class="login-box">
-      <h1 style="text-align: center; color: #6d5dfc">Lenory</h1>
-
-      <div id="error" class="error">Senha incorreta!</div>
-
+      <h1>Lenory</h1>
+      <div id="error" class="error">Usuário ou senha incorretos!</div>
       <input id="user" type="text" placeholder="Usuário" />
       <input id="pass" type="password" placeholder="Senha" />
       <button onclick="login()">Entrar</button>
     </div>
 
     <script>
+      // Bloqueia acesso direto ao index sem login
+      if (localStorage.getItem("lenory_logged") === "true") {
+        window.location.href = "index.html";
+      }
+
       function login() {
-        const user = document.getElementById("user").value;
-        const pass = document.getElementById("pass").value;
+        const user = document.getElementById("user").value.trim();
+        const pass = document.getElementById("pass").value.trim();
         const error = document.getElementById("error");
 
+        // LOGIN FAKE — altere o user e senha se quiser
         if (user === "kawa" && pass === "1234") {
           localStorage.setItem("lenory_logged", "true");
           window.location.href = "index.html";

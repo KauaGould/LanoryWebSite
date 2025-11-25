@@ -2,110 +2,133 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lenory — Home</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="navbar.js"></script>
-
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
     <style>
-      .feed {
-        max-width: 700px;
-        margin: 40px auto;
-        padding: 0 20px;
+      :root {
+        --bg: #0d0d0d;
+        --card: rgba(22, 22, 22, 0.85);
+        --accent: #6d5dfc;
+        --text: #fff;
+        --muted: #bbb;
+        --radius: 16px;
+        --shadow: rgba(0, 0, 0, 0.5);
       }
-
-      .post {
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
         background: #141414;
-        padding: 18px;
-        border-radius: 15px;
-        border: 1px solid #222;
-        margin-bottom: 25px;
-        transition: 0.25s;
-      }
-
-      .post:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px #0005;
-      }
-
-      .post-header {
+        padding: 15px 25px;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        margin-bottom: 12px;
+        border-bottom: 1px solid #222;
       }
-
-      .avatar {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background: #6d5dfc;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      nav .logo {
+        font-size: 25px;
         font-weight: bold;
-        font-size: 20px;
-        margin-right: 12px;
+        color: var(--accent);
       }
-
-      .name {
-        font-size: 18px;
-        font-weight: bold;
-        color: #a99fff;
-      }
-
-      .text {
+      nav .nav-links a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #bbb;
         font-size: 16px;
-        color: #ddd;
-        margin-top: 4px;
-      }
-
-      .samuel-btn {
-        margin-top: 15px;
-        padding: 10px 14px;
-        background: #6d5dfc;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        color: white;
-        font-weight: bold;
         transition: 0.2s;
       }
-
-      .samuel-btn:hover {
-        transform: scale(1.05);
+      nav .nav-links a:hover {
+        color: #fff;
+      }
+      .main-container {
+        flex: 1;
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        overflow: auto;
+      }
+      .feed {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .sidebar {
+        width: 250px;
+        background: var(--card);
+        padding: 15px;
+        border-radius: var(--radius);
+        border: 1px solid #222;
+      }
+      .post {
+        background: #161616;
+        padding: 15px;
+        border-radius: var(--radius);
+        border: 1px solid #222;
+      }
+      .post .title {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: var(--accent);
+      }
+      .post .text {
+        color: #ccc;
       }
     </style>
   </head>
-
   <body>
-    <div class="feed">
-      <div class="post">
-        <div class="post-header">
-          <div class="avatar">L</div>
-          <div class="name">Lenory Team</div>
-        </div>
-        <div class="text">
-          Bem-vindo ao Lenory! A rede social que vai pisar forte na
-          concorrência.
-        </div>
-      </div>
-
-      <div class="post">
-        <div class="post-header">
-          <div class="avatar">K</div>
-          <div class="name">Kauã</div>
-        </div>
-        <div class="text">Easter Egg novo detectado… 👀🔥</div>
-
-        <button class="samuel-btn" onclick="boaSamuel()">
-          Ativar BOA SAMUEL
-        </button>
-      </div>
-    </div>
-
     <script>
-      function boaSamuel() {
-        alert("BOA SAMUEL!!!");
+      if (localStorage.getItem("lenory_logged") !== "true") {
+        window.location.href = "login.html";
       }
     </script>
+
+    <nav>
+      <div class="logo">Lenory</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Perfil</a>
+        <a href="chat.html">Chat</a>
+        <a href="communities.html">Comunidades</a>
+        <a href="watchparty.html">WatchParty</a>
+        <a href="games.html">Games</a>
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <div class="sidebar">
+        <h3>Notificações</h3>
+        <p>Nenhuma notificação por enquanto.</p>
+        <hr style="margin: 10px 0; border: 1px solid #222" />
+        <h3>Sugestões</h3>
+        <p>Siga o Samuel</p>
+        <p>Siga a Bia</p>
+      </div>
+
+      <div class="feed">
+        <div class="post">
+          <div class="title">Bem-vindo ao Lenory!</div>
+          <div class="text">
+            A rede social que vai humilhar qualquer concorrente quando a gente
+            terminar.
+          </div>
+        </div>
+        <div class="post">
+          <div class="title">Easter Egg</div>
+          <div class="text">Boa samuel! (isso aqui vai ficar pra sempre)</div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

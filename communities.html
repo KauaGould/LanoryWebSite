@@ -2,36 +2,114 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lenory — Comunidades</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="navbar.js"></script>
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+    <style>
+      :root {
+        --bg: #0d0d0d;
+        --card: rgba(22, 22, 22, 0.85);
+        --accent: #6d5dfc;
+        --text: #fff;
+        --radius: 16px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
+        background: #141414;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #222;
+      }
+      nav .logo {
+        font-size: 25px;
+        font-weight: bold;
+        color: var(--accent);
+      }
+      nav .nav-links a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #bbb;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+      nav .nav-links a:hover {
+        color: #fff;
+      }
+      .container {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .community {
+        background: #161616;
+        padding: 15px;
+        border-radius: var(--radius);
+        border: 1px solid #222;
+      }
+      .community h3 {
+        color: var(--accent);
+        margin-bottom: 5px;
+      }
+      .community p {
+        color: #ccc;
+      }
+    </style>
   </head>
-
   <body>
+    <script>
+      if (localStorage.getItem("lenory_logged") !== "true") {
+        window.location.href = "login.html";
+      }
+    </script>
+    <nav>
+      <div class="logo">Lenory</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="profile.html">Perfil</a>
+        <a href="chat.html">Chat</a>
+        <a href="communities.html">Comunidades</a>
+        <a href="watchparty.html">WatchParty</a>
+        <a href="games.html">Games</a>
+      </div>
+    </nav>
+
     <div class="container">
-      <div class="card">
-        <div class="card-title">Notícias do Dia</div>
-        <div class="card-text">
+      <div class="community">
+        <h3>Notícias do Dia</h3>
+        <p>
           Atualizações rápidas, curiosidades e informações verificadas (ou
           quase).
-        </div>
+        </p>
       </div>
-
-      <div class="card">
-        <div class="card-title">Canal Principal</div>
-        <div class="card-text">Posts da manhã, tarde e noitada.</div>
+      <div class="community">
+        <h3>Canal Principal</h3>
+        <p>O coração do Lenory. Posts da manhã, tarde e noitada.</p>
       </div>
-
-      <div class="card">
-        <div class="card-title">Pamphilo Crew</div>
-        <div class="card-text">Artes e memes do ADM lendário.</div>
+      <div class="community">
+        <h3>Pamphilo Crew</h3>
+        <p>Área do ADM parceiro mandando as artes e memes dele.</p>
       </div>
-
-      <div class="card">
-        <div class="card-title">Zona Caótica</div>
-        <div class="card-text">
-          Lugar perfeito pra versão caótica da música.
-        </div>
+      <div class="community">
+        <h3>Zona Caótica</h3>
+        <p>
+          Lugar perfeito pra continuação da versão caótica daquela música aí.
+        </p>
       </div>
     </div>
   </body>
