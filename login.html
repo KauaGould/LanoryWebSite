@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lenory — Login</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .login-box {
+        background: #161616;
+        padding: 30px;
+        width: 320px;
+        border-radius: 12px;
+        border: 1px solid #222;
+        box-shadow: 0 0 10px #0007;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: none;
+        background: #222;
+        color: #fff;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #6d5dfc;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      button:hover {
+        transform: scale(1.02);
+      }
+      .error {
+        color: #ff5c5c;
+        margin-bottom: 10px;
+        font-size: 14px;
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-box">
+      <h1 style="text-align: center; color: #6d5dfc">Lenory</h1>
+
+      <div id="error" class="error">Senha incorreta!</div>
+
+      <input id="user" type="text" placeholder="Usuário" />
+      <input id="pass" type="password" placeholder="Senha" />
+      <button onclick="login()">Entrar</button>
+    </div>
+
+    <script>
+      function login() {
+        const user = document.getElementById("user").value;
+        const pass = document.getElementById("pass").value;
+        const error = document.getElementById("error");
+
+        if (user === "kawa" && pass === "1234") {
+          localStorage.setItem("lenory_logged", "true");
+          window.location.href = "index.html";
+        } else {
+          error.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>

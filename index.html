@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lenory — Home</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="navbar.js"></script>
+
+    <style>
+      .feed {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .post {
+        background: #141414;
+        padding: 18px;
+        border-radius: 15px;
+        border: 1px solid #222;
+        margin-bottom: 25px;
+        transition: 0.25s;
+      }
+
+      .post:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px #0005;
+      }
+
+      .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #6d5dfc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 20px;
+        margin-right: 12px;
+      }
+
+      .name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #a99fff;
+      }
+
+      .text {
+        font-size: 16px;
+        color: #ddd;
+        margin-top: 4px;
+      }
+
+      .samuel-btn {
+        margin-top: 15px;
+        padding: 10px 14px;
+        background: #6d5dfc;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+
+      .samuel-btn:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="feed">
+      <div class="post">
+        <div class="post-header">
+          <div class="avatar">L</div>
+          <div class="name">Lenory Team</div>
+        </div>
+        <div class="text">
+          Bem-vindo ao Lenory! A rede social que vai pisar forte na
+          concorrência.
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <div class="avatar">K</div>
+          <div class="name">Kauã</div>
+        </div>
+        <div class="text">Easter Egg novo detectado… 👀🔥</div>
+
+        <button class="samuel-btn" onclick="boaSamuel()">
+          Ativar BOA SAMUEL
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function boaSamuel() {
+        alert("BOA SAMUEL!!!");
+      }
+    </script>
+  </body>
+</html>
